@@ -38,6 +38,7 @@ in
     pkgs.nixpkgs-fmt
 
     pkgs.xdg-ninja
+    pkgs.asdf-vm
 
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
@@ -91,8 +92,14 @@ in
       shellAliases = import ./aliases.nix { inherit config; };
       loginShellInit = ''
         fish_add_path ${env.CARGO_HOME}/bin
+
+      '';
+      shellInit = ''
+        source "$HOME/.nix-profile/share/asdf-vm/asdf.fish"
       '';
     };
     home-manager.enable = true;
   };
+
+  fonts.fontconfig.enable = true;
 }
