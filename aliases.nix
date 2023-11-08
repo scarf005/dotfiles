@@ -8,4 +8,6 @@ in
   scheme = "scheme --eehistory ${xdg.XDG_DATA_HOME}/chezscheme/history";
 
   gdb = "gdb -n -x ${xdg.XDG_CONFIG_HOME}/gdb/init";
+
+  nvidia-settings = "nvidia-settings --config=${xdg.XDG_CONFIG_HOME}/nvidia/settings";
 }
