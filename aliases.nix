@@ -2,12 +2,13 @@
 
 let
   xdg = import ./xdg.nix { inherit config; };
+  aliases = with xdg; {
+    petite = "petite --eehistory ${XDG_DATA_HOME}/chezscheme/history";
+    scheme = "scheme --eehistory ${XDG_DATA_HOME}/chezscheme/history";
+
+    gdb = "gdb -n -x ${XDG_CONFIG_HOME}/gdb/init";
+
+    nvidia-settings = "nvidia-settings --config=${XDG_CONFIG_HOME}/nvidia/settings";
+  };
 in
-{
-  petite = "petite --eehistory ${xdg.XDG_DATA_HOME}/chezscheme/history";
-  scheme = "scheme --eehistory ${xdg.XDG_DATA_HOME}/chezscheme/history";
-
-  gdb = "gdb -n -x ${xdg.XDG_CONFIG_HOME}/gdb/init";
-
-  nvidia-settings = "nvidia-settings --config=${xdg.XDG_CONFIG_HOME}/nvidia/settings";
-}
+aliases
