@@ -1,15 +1,15 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   nix = {
     package = pkgs.nix;
     settings = {
       experimental-features = [ "nix-command" "flakes" ];
-      substituters = ["https://cache.nixos.org" "https://nixcache.reflex-frp.org" "https://digitallyinduced.cachix.org"];
+      substituters = [ "https://cache.nixos.org" "https://nixcache.reflex-frp.org" "https://digitallyinduced.cachix.org" ];
       trusted-public-keys = [
         "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-      "ryantrinkle.com-1:JJiAKaRv9mWgpVAz8dwewnZe0AzzEAzPkagE9SP5NWI="
-      "digitallyinduced.cachix.org-1:y+wQvrnxQ+PdEsCt91rmvv39qRCYzEgGQaldK26hCKE="
+        "ryantrinkle.com-1:JJiAKaRv9mWgpVAz8dwewnZe0AzzEAzPkagE9SP5NWI="
+        "digitallyinduced.cachix.org-1:y+wQvrnxQ+PdEsCt91rmvv39qRCYzEgGQaldK26hCKE="
       ];
     };
   };
@@ -31,6 +31,8 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = [
+    inputs.nil.packages.${pkgs.system}.default
+    pkgs.nixpkgs-fmt
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     # pkgs.hello
