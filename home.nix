@@ -1,5 +1,8 @@
 { config, pkgs, inputs, ... }:
 
+let
+  env = import ./env.nix { inherit config; };
+in
 {
   nix = {
     package = pkgs.nix;
@@ -33,6 +36,9 @@
   home.packages = [
     inputs.nil.packages.${pkgs.system}.default
     pkgs.nixpkgs-fmt
+
+    pkgs.xdg-ninja
+
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     # pkgs.hello
@@ -76,10 +82,17 @@
   #  /etc/profiles/per-user/scarf/etc/profile.d/hm-session-vars.sh
   #
   # if you don't want to manage your shell through Home Manager.
-  home.sessionVariables = {
-    # EDITOR = "emacs";
-  };
+  home.sessionVariables = env;
 
   # Let Home Manager install and manage itself.
-  programs.home-manager.enable = true;
+  programs = {
+    fish = {
+      enable = true;
+      shellAliases = import ./aliases.nix { inherit config; };
+      loginShellInit = ''
+        fish_add_path ${env.CARGO_HOME}/bin
+      '';
+    };
+    home-manager.enable = true;
+  };
 }
