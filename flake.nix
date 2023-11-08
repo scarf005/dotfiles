@@ -10,6 +10,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    system-manager = {
+      url = "github:numtide/system-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     rust-overlay = {
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -22,14 +27,15 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, ... } @ inputs:
+  outputs = { self, nixpkgs, home-manager, system-manager, ... } @ inputs:
     let
       inherit (self) outputs;
       # forEachSystem = nixpkgs.lib.genAttrs ["x86_64-linux"];
       # forEachPkgs = f: forEachSystem (sys: f nixpkgs.legacyPackages.${sys});
       system = "x86_64-linux";
-      pkgs = nixpkgs.legacyPackages.${system};
-    in {
+      pkgs = nixpkgs.legacyPackages.${system} // import ./pkgs { inherit pkgs; };
+    in
+    {
       homeConfigurations."scarf" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
 
@@ -39,7 +45,7 @@
 
         # Optionally use extraSpecialArgs
         # to pass through arguments to home.nix
-        extraSpecialArgs = {inherit inputs outputs;};
+        extraSpecialArgs = { inherit inputs outputs; };
       };
     };
 }
