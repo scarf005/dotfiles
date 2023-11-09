@@ -16,6 +16,8 @@ let
     AWS_SHARED_CREDENTIALS_FILE = "${XDG_CONFIG_HOME}/aws/credentials";
     AWS_CONFIG_FILE = "${XDG_CONFIG_HOME}/aws/config";
 
+    DENO_INSTALL = "${XDG_DATA_HOME}/deno";
+
     _JAVA_OPTIONS = ''-Djava.util.prefs.userRoot="${XDG_CONFIG_HOME}"/java'';
 
     MINIKUBE_HOME = "${XDG_DATA_HOME}/minikube";

@@ -85,19 +85,19 @@ in
   # if you don't want to manage your shell through Home Manager.
   home.sessionVariables = env;
 
-  # Let Home Manager install and manage itself.
   programs = {
     fish = {
       enable = true;
       shellAliases = import ./aliases.nix { inherit config; };
       loginShellInit = ''
         fish_add_path ${env.CARGO_HOME}/bin
-
+        fish_add_path ${env.DENO_INSTALL}/bin
       '';
       shellInit = ''
         source "$HOME/.nix-profile/share/asdf-vm/asdf.fish"
       '';
     };
+    # Let Home Manager install and manage itself.
     home-manager.enable = true;
   };
 

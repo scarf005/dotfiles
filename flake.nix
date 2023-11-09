@@ -10,11 +10,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    system-manager = {
-      url = "github:numtide/system-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     rust-overlay = {
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -22,6 +17,12 @@
 
     nil = {
       url = "github:oxalica/nil";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.rust-overlay.follows = "rust-overlay";
+    };
+
+    system-manager = {
+      url = "github:numtide/system-manager";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.rust-overlay.follows = "rust-overlay";
     };
@@ -36,6 +37,12 @@
       pkgs = nixpkgs.legacyPackages.${system} // import ./pkgs { inherit pkgs; };
     in
     {
+      systemConfigs.default = system-manager.lib.makeSystemConfig {
+        modules = [
+          ./modules
+        ];
+      };
+
       homeConfigurations."scarf" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
 
