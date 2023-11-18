@@ -48,7 +48,8 @@ let
     LESSHISTFILE = "${XDG_CACHE_HOME}/less/history";
 
     SQLITE_HISTORY = "${XDG_CACHE_HOME}/sqlite_history";
-
+  
+    QT_QPA_PLATFORMTHEME = "kde";
 
     UNISON = "${XDG_DATA_HOME}/unison";
   };

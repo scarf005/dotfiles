@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, inputs, lib, ... }:
 
 let
   env = import ./env.nix { inherit config; };
@@ -31,11 +31,22 @@ in
   # release notes.
   home.stateVersion = "23.05"; # Please read the comment before changing.
 
+  # nixpkgs.config.allowUnfreePredicate = pkg:
+  #   builtins.elem (lib.getName pkg) [
+  #     # Add additional package names here
+  #     "vscode"
+  #   ];
+
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = [
     inputs.nil.packages.${pkgs.system}.default
     pkgs.nixpkgs-fmt
+
+    # pkgs.vscode
+    pkgs.helix
+
+    pkgs.bun
 
     pkgs.xdg-ninja
     pkgs.asdf-vm
