@@ -40,6 +40,7 @@ in
     pkgs.xdg-ninja
     pkgs.asdf-vm
 
+    pkgs.numbat
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     # pkgs.hello
@@ -86,6 +87,11 @@ in
   home.sessionVariables = env;
 
   programs = {
+    direnv = {
+      enable = true;
+      nix-direnv.enable = true;
+    };
+
     fish = {
       enable = true;
       shellAliases = import ./aliases.nix { inherit config; };
@@ -95,10 +101,25 @@ in
       '';
       shellInit = ''
         source "$HOME/.nix-profile/share/asdf-vm/asdf.fish"
+        zoxide init fish | source
       '';
     };
     # Let Home Manager install and manage itself.
     home-manager.enable = true;
+  };
+
+  i18n = {
+    # defaultLocale = "ko_KR.UTF-8";
+    inputMethod = {
+      enabled = "kime";
+      kime.config = {
+        indicator.icon_color = "Black";
+        addons = {
+          all = [ ];
+          dubeolsik = [ "TreatJongseongAsChoseong" ];
+        };
+      };
+    };
   };
 
   fonts.fontconfig.enable = true;

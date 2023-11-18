@@ -36,6 +36,7 @@ let
     DOCKER_CONFIG = "${XDG_CONFIG_HOME}/docker";
 
     GHCUP_USE_XDG_DIRS = "true";
+    STACK_ROOT = "${XDG_DATA_HOME}/stack";
 
     GNUPGHOME = "${XDG_DATA_HOME}/gnupg";
     GRADLE_USER_HOME = "${XDG_DATA_HOME}/gradle";
@@ -48,7 +49,6 @@ let
 
     SQLITE_HISTORY = "${XDG_CACHE_HOME}/sqlite_history";
 
-    STACK_ROOT = "${XDG_DATA_HOME}/stack";
 
     UNISON = "${XDG_DATA_HOME}/unison";
   };
