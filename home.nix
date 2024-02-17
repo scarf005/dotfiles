@@ -1,7 +1,8 @@
-{ config, pkgs, inputs, lib, ... }:
+{ config, pkgs, inputs, ... }:
 
 let
   env = import ./env.nix { inherit config; };
+  xdg = import ./xdg.nix { inherit config; };
 in
 {
   nix = {
@@ -52,6 +53,7 @@ in
     pkgs.asdf-vm
 
     pkgs.numbat
+    pkgs.sccache
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     # pkgs.hello
@@ -73,6 +75,25 @@ in
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
   home.file = {
+    "${env.PYTHONSTARTUP}".text = ''
+      import os
+      import atexit
+      import readline
+
+      history = os.path.join(os.environ['XDG_CACHE_HOME'], 'python_history')
+      try:
+          readline.read_history_file(history)
+      except OSError:
+          pass
+
+      def write_history():
+          try:
+              readline.write_history_file(history)
+          except OSError:
+              pass
+
+      atexit.register(write_history)
+    '';
     # # Building this configuration will create a copy of 'dotfiles/screenrc' in
     # # the Nix store. Activating the configuration will then make '~/.screenrc' a
     # # symlink to the Nix store copy.
@@ -109,6 +130,7 @@ in
       loginShellInit = ''
         fish_add_path ${env.CARGO_HOME}/bin
         fish_add_path ${env.DENO_INSTALL}/bin
+        fish_add_path ${xdg.XDG_DATA_HOME}/pnpm
       '';
       shellInit = ''
         source "$HOME/.nix-profile/share/asdf-vm/asdf.fish"
@@ -119,19 +141,19 @@ in
     home-manager.enable = true;
   };
 
-  i18n = {
-    # defaultLocale = "ko_KR.UTF-8";
-    inputMethod = {
-      enabled = "kime";
-      kime.config = {
-        indicator.icon_color = "Black";
-        addons = {
-          all = [ ];
-          dubeolsik = [ "TreatJongseongAsChoseong" ];
-        };
-      };
-    };
-  };
+  # i18n = {
+  #   # defaultLocale = "ko_KR.UTF-8";
+  #   inputMethod = {
+  #     enabled = "kime";
+  #     kime.config = {
+  #       indicator.icon_color = "Black";
+  #       addons = {
+  #         all = [ ];
+  #         dubeolsik = [ "TreatJongseongAsChoseong" ];
+  #       };
+  #     };
+  #   };
+  # };
 
   fonts.fontconfig.enable = true;
 }

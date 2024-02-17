@@ -29,8 +29,10 @@ let
     CARGO_HOME = "${XDG_DATA_HOME}/cargo";
 
     CRAWL_DIR = "${XDG_DATA_HOME}/crawl/";
-
+    GTK2_RC_FILES = "${XDG_CONFIG_HOME}/gtk-2.0/gtkrc";
     CUDA_CACHE_PATH = "${XDG_CACHE_HOME}/cuda";
+
+    PARALLEL_HOME = "${XDG_CONFIG_HOME}/parallel";
 
     DISTCC_DIR = "${XDG_CONFIG_HOME}/distcc";
     DOCKER_CONFIG = "${XDG_CONFIG_HOME}/docker";
@@ -48,10 +50,14 @@ let
     LESSHISTFILE = "${XDG_CACHE_HOME}/less/history";
 
     SQLITE_HISTORY = "${XDG_CACHE_HOME}/sqlite_history";
-  
+    SDKMAN_DIR = "${XDG_DATA_HOME}/sdkman";
+
     QT_QPA_PLATFORMTHEME = "kde";
 
     UNISON = "${XDG_DATA_HOME}/unison";
+
+    ZDOTDIR="${XDG_CONFIG_HOME}/zsh";
+    PYTHONSTARTUP="${XDG_CONFIG_HOME}/python/pythonrc";
   };
 in
 xdg // env
