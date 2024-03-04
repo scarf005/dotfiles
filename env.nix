@@ -17,6 +17,9 @@ let
     AWS_CONFIG_FILE = "${XDG_CONFIG_HOME}/aws/config";
 
     DENO_INSTALL = "${XDG_DATA_HOME}/deno";
+    DENO_INSTALL_ROOT = "${XDG_DATA_HOME}/deno";
+
+    DENO_DIR = "${XDG_CACHE_HOME}/deno";
 
     _JAVA_OPTIONS = ''-Djava.util.prefs.userRoot="${XDG_CONFIG_HOME}"/java'';
 
@@ -56,8 +59,8 @@ let
 
     UNISON = "${XDG_DATA_HOME}/unison";
 
-    ZDOTDIR="${XDG_CONFIG_HOME}/zsh";
-    PYTHONSTARTUP="${XDG_CONFIG_HOME}/python/pythonrc";
+    ZDOTDIR = "${XDG_CONFIG_HOME}/zsh";
+    PYTHONSTARTUP = "${XDG_CONFIG_HOME}/python/pythonrc";
   };
 in
 xdg // env

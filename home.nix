@@ -54,6 +54,10 @@ in
 
     pkgs.numbat
     pkgs.sccache
+    pkgs.lcov
+    pkgs.vlc
+    pkgs.yt-dlp
+    pkgs.asciinema
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     # pkgs.hello
