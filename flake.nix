@@ -4,6 +4,7 @@
   inputs = {
     # Specify the source of Home Manager and Nixpkgs.
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -28,13 +29,14 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, system-manager, ... } @ inputs:
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, system-manager, ... } @ inputs:
     let
       inherit (self) outputs;
       # forEachSystem = nixpkgs.lib.genAttrs ["x86_64-linux"];
       # forEachPkgs = f: forEachSystem (sys: f nixpkgs.legacyPackages.${sys});
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system} // import ./pkgs { inherit pkgs; };
+      pkgs-unstable = nixpkgs-unstable.legacyPackages.${system} // import ./pkgs { inherit pkgs; };
     in
     {
       systemConfigs.default = system-manager.lib.makeSystemConfig {
@@ -52,7 +54,7 @@
 
         # Optionally use extraSpecialArgs
         # to pass through arguments to home.nix
-        extraSpecialArgs = { inherit inputs outputs; };
+        extraSpecialArgs = { inherit inputs outputs pkgs-unstable; };
       };
     };
 }
