@@ -61,6 +61,8 @@ let
 
     ZDOTDIR = "${XDG_CONFIG_HOME}/zsh";
     PYTHONSTARTUP = "${XDG_CONFIG_HOME}/python/pythonrc";
+
+    OMF_PATH = "${XDG_DATA_HOME}/omf";
   };
 in
 xdg // env

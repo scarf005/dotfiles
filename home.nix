@@ -138,13 +138,16 @@ in
       enable = true;
       shellAliases = import ./aliases.nix { inherit config; };
       loginShellInit = ''
+      '';
+      shellInit = ''
         fish_add_path ${env.CARGO_HOME}/bin
         fish_add_path ${env.DENO_INSTALL}/bin
         fish_add_path ${xdg.XDG_DATA_HOME}/pnpm
-      '';
-      shellInit = ''
+
         source "$HOME/.nix-profile/share/asdf-vm/asdf.fish"
+
         zoxide init fish | source
+        source $OMF_PATH/init.fish
       '';
     };
     # Let Home Manager install and manage itself.
