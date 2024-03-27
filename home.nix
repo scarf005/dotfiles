@@ -47,17 +47,23 @@ in
     # pkgs.vscode
     pkgs.helix
 
-    pkgs.bun
-
     pkgs.xdg-ninja
     pkgs.asdf-vm
 
     pkgs.numbat
     pkgs.sccache
     pkgs.lcov
-    pkgs.vlc
     pkgs.yt-dlp
     pkgs.asciinema
+
+    pkgs.traceroute
+
+    pkgs-unstable.vlc
+    pkgs-unstable.shellcheck
+    pkgs-unstable.mold
+    pkgs-unstable.bun
+    pkgs-unstable.container2wasm
+
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     # pkgs.hello
