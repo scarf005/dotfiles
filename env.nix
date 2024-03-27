@@ -21,7 +21,7 @@ let
 
     DENO_DIR = "${XDG_CACHE_HOME}/deno";
 
-    _JAVA_OPTIONS = ''-Djava.util.prefs.userRoot="${XDG_CONFIG_HOME}"/java'';
+    _JAVA_OPTIONS = ''-Djava.util.prefs.userRoot=${XDG_CONFIG_HOME}/java'';
 
     MINIKUBE_HOME = "${XDG_DATA_HOME}/minikube";
 
