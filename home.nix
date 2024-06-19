@@ -2,7 +2,10 @@
 
 let
   env = import ./env.nix { inherit config; };
-  xdg = import ./xdg.nix { inherit config; };
+  xdgDirs = import ./xdg.nix { inherit config; };
+
+  sessionVariables = builtins.concatStringsSep "\n"
+    (map (k: "set -gx ${k} ${env.${k}}") (builtins.attrNames env));
 in
 {
   nix = {
@@ -104,6 +107,7 @@ in
 
       atexit.register(write_history)
     '';
+
     # # Building this configuration will create a copy of 'dotfiles/screenrc' in
     # # the Nix store. Activating the configuration will then make '~/.screenrc' a
     # # symlink to the Nix store copy.
@@ -126,7 +130,7 @@ in
   #  /etc/profiles/per-user/scarf/etc/profile.d/hm-session-vars.sh
   #
   # if you don't want to manage your shell through Home Manager.
-  home.sessionVariables = env;
+  # home.sessionVariables = env;
 
   programs = {
     direnv = {
@@ -139,10 +143,13 @@ in
       shellAliases = import ./aliases.nix { inherit config; };
       loginShellInit = ''
       '';
+
       shellInit = ''
+        ${sessionVariables}
+
         fish_add_path ${env.CARGO_HOME}/bin
         fish_add_path ${env.DENO_INSTALL}/bin
-        fish_add_path ${xdg.XDG_DATA_HOME}/pnpm
+        fish_add_path ${xdgDirs.XDG_DATA_HOME}/pnpm
 
         source "$HOME/.nix-profile/share/asdf-vm/asdf.fish"
 
