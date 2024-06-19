@@ -16,6 +16,9 @@ let
     AWS_SHARED_CREDENTIALS_FILE = "${XDG_CONFIG_HOME}/aws/credentials";
     AWS_CONFIG_FILE = "${XDG_CONFIG_HOME}/aws/config";
 
+    GRIT_INSTALL = "${XDG_DATA_HOME}/grit";
+    GRIT_TELEMETRY_DISABLED = "true";
+
     DENO_INSTALL = "${XDG_DATA_HOME}/deno";
     DENO_INSTALL_ROOT = "${XDG_DATA_HOME}/deno";
 
