@@ -60,6 +60,7 @@ in
     pkgs.asciinema
 
     pkgs.traceroute
+    pkgs.fastfetch
 
     pkgs-unstable.vlc
     pkgs-unstable.shellcheck
