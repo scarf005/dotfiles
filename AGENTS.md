@@ -224,7 +224,8 @@ to that agent. Repository `AGENTS.md`/`CLAUDE.md` rules override these.
 ## Writing
 
 - Docs, issues, PRs, release notes, and skills: terse, actionable, link sources instead of copying, no process
-  provenance or unmeasured statistics. Include direct related links when they exist.
+  provenance or unmeasured statistics. Include direct related links when they exist. Load `pr-writing` before
+  writing or editing a PR title or body.
 - Before saving or sending prose you wrote (docs, UI copy, artifact text, replies), run the `humanizer` skill's
   checks on it and rewrite every tell, e.g. summary sections restating the intro, closers that only name a reference
   or the point, meanings the source does not state, bold-label bullet lists.
