@@ -1,0 +1,15 @@
+# opt-in: ignore everything, track only AI agent settings
+/*
+!/.gitignore
+!/AGENTS.md
+!/persona/
+!/gemini/
+/gemini/*
+!/gemini/GEMINI.md
+!/gemini/settings.json
+!/gemini/skills/
+!/opencode/
+/opencode/*
+!/opencode/opencode.jsonc
+!/opencode/oh-my-opencode.jsonc
+!/opencode/skills/

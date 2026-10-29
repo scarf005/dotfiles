@@ -1,0 +1,57 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "plugin": [
+    // "oh-my-opencode@latest",
+    //"opencode-antigravity-auth@1.6.0"
+  ],
+  "disabled_providers": ["anthropic", "google"],
+  "model": "openai/gpt-5.4",
+  "small_model": "openai/gpt-5.4",
+  "provider": {
+    "openai": {
+      "models": {
+        "gpt-5.5": {
+          "options": {
+            "reasoningEffort": "high",
+            "textVerbosity": "low",
+          },
+        },
+        "gpt-5.4": {
+          "options": {
+            "reasoningEffort": "low",
+            "textVerbosity": "low",
+          },
+        },
+      },
+    },
+  },
+  "permission": {
+    "read": {
+      "~/.config/cataclysm-bn/": "allow",
+      "~/.local/share/cataclysm-bn/": "allow",
+    },
+    "external_directory": {
+      "/run/media/home/scarf/repo/cata/Cataclysm-BN-worktrees/**": "allow",
+      "/tmp/**": "allow",
+    },
+    "edit": {
+      "/run/media/home/scarf/repo/cata/Cataclysm-BN-worktrees/**": "allow",
+      "/tmp/**": "allow",
+    },
+  },
+  "mcp": {
+    "rea": {
+      "type": "local",
+      "command": [
+        "/home/scarf/.local/share/mise/installs/node/26.11.1/bin/node",
+        "/home/scarf/.local/share/mise/installs/node/26.11.1/lib/node_modules/rea-agents/scripts/rea.mjs",
+        "mcp"
+      ],
+      "enabled": true,
+      "environment": {
+        "GHIDRA_INSTALL_DIR": "/home/scarf/.local/share/ghidra/ghidra_12.1.4_PUBLIC",
+        "JAVA_HOME": "/home/scarf/.cache/coursier/arc/https/github.com/adoptium/temurin24-binaries/releases/download/jdk-24.0.1%252B9/OpenJDK24U-jdk_x64_linux_hotspot_24.0.1_9.tar.gz/jdk-24.0.1+9"
+      }
+    }
+  },
+}
