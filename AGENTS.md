@@ -225,6 +225,9 @@ to that agent. Repository `AGENTS.md`/`CLAUDE.md` rules override these.
 
 - Docs, issues, PRs, release notes, and skills: terse, actionable, link sources instead of copying, no process
   provenance or unmeasured statistics. Include direct related links when they exist.
+- Before saving or sending prose you wrote (docs, UI copy, artifact text, replies), run the `humanizer` skill's
+  checks on it and rewrite every tell, e.g. summary sections restating the intro, closers that only name a reference
+  or the point, meanings the source does not state, bold-label bullet lists.
 - Bug reports: symptom and related link first, then repro, environment, logs. Performance PRs: before/after table.
 - Player-facing docs lead with visible gameplay consequences.
 - Images committed to a repository (README previews, docs): WebP at quality 50.
