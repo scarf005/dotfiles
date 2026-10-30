@@ -108,6 +108,8 @@ to that agent. Repository `AGENTS.md`/`CLAUDE.md` rules override these.
 - Edit generators, not generated files.
 - Use repository commands, presets, and formatters as the contract; investigate failures instead of bypassing them.
   Run the hook's file-scoped formatter before validation.
+- When you add or find a command a person would likely run (build, install, launch, test loop), add it to the
+  repository's justfile up front with a one-line comment, instead of only giving it in a reply.
 - On CI failure after an intentional behavior change, check for stale expectations first.
 - Compare adjacent same-role baselines before changing balance numbers.
 - Verify facts with diagnostics before explaining them; read code/docs before giving exact shortcuts or menu paths.
