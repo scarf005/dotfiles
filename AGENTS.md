@@ -121,8 +121,9 @@ to that agent. Repository `AGENTS.md`/`CLAUDE.md` rules override these.
   requested; no generic state class names shared across components.
 - For novice onboarding, research teaching references first; tie each cue to an actionable object, keep the taught
   controls and pace, and validate in the real interaction. Passing tests are not usability evidence.
-- Deno/TypeScript projects and tasks explicitly selecting it use Deno/TypeScript throughout, including ignored setup,
-  IPC reproducers, validation, and cleanup (`deno-script` skill). Carry this constraint into delegated continuations
+- Scripts you write outside a repository's own tooling (setup, IPC reproducers, validation, cleanup, one-off tools)
+  are single-file Cargo scripts: `cargo +nightly -Zscript <file>.rs` with a `---` frontmatter manifest. Repository
+  code and tooling keep the repository's language. Carry this constraint into delegated continuations
   and inspect executed commands before acceptance. Missing APIs/permissions do not authorize a Python/shell driver or
   interpreter switch; use a compatible bounded native utility or report the blocker.
 - XDG paths; add needed env vars to `~/.fish/config/conf.d/xdg.fish`.
