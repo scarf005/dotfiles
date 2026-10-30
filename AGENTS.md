@@ -223,6 +223,8 @@ to that agent. Repository `AGENTS.md`/`CLAUDE.md` rules override these.
 
 ## Writing
 
+- English prose for people (PRs, issues, docs, release notes, explanations): ASD-STE100 Simplified Technical English;
+  short sentences, one fact or instruction each, active voice, approved common words, numbered steps for sequences.
 - Docs, issues, PRs, release notes, and skills: terse, actionable, link sources instead of copying, no process
   provenance or unmeasured statistics. Include direct related links when they exist. Load `pr-writing` before
   writing or editing a PR title or body.
