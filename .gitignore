@@ -4,6 +4,10 @@
 !/AGENTS.md
 !/.pre-commit-config.yaml
 !/justfile
+!/.gitmodules
+!/claude
+!/codex
+!/pi
 !/persona/
 !/gemini/
 /gemini/*
