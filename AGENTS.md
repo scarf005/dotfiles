@@ -263,8 +263,10 @@ to that agent. Repository `AGENTS.md`/`CLAUDE.md` rules override these.
 - A backlog or audit entry is not authority: before dispatching, check each item against the repository rules and
   the user's stated principles, and drop or reclassify conflicts. When the user states a new principle, re-check all
   in-flight and merged work against it before dispatching more, and record the result.
-- Before merging a lane, read its diff yourself against the user's principles and the brief; passing tests and the
-  lane's own reviewer (which checks against your brief) are not acceptance. Before calling a review or plan done,
+- Before merging a lane, read its diff yourself against the user's principles and the brief, including every
+  user-facing string, and drive any changed UI yourself; passing tests and the lane's own reviewer (which checks
+  against your brief) are not acceptance. Record standing user corrections in the repository's `AGENTS.md` so
+  every fresh lane inherits them; a parent-only memory does not reach lanes. Before calling a review or plan done,
   check it answers the level the user asked for (architecture vs line-level).
 - When the session context has been summarized and judgement depends on summaries and reports, write a handoff
   document (decisions, state, open questions, next steps) and recommend continuing in a fresh session.
