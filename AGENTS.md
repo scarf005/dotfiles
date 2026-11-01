@@ -149,9 +149,11 @@ to that agent. Repository `AGENTS.md`/`CLAUDE.md` rules override these.
   exits 0 with no output is complete.
 - Long runs (suites, captures, builds, workers): run each as a transient unit, as a tracked background task:
   `flock $XDG_RUNTIME_DIR/<group>.lock systemd-run --user --quiet --wait --collect --slice=bnwork.slice
-  --unit=<label> -p RuntimeMaxSec=<limit> -p StandardOutput=append:<log> -p StandardError=append:<log> <script>`
+  --unit=<label> -p RuntimeMaxSec=<limit> -p MemoryMax=<limit> -p MemorySwapMax=0 -p StandardOutput=append:<log> -p StandardError=append:<log> <script>`
   (one lock file per shared resource serializes the group; the limit excludes lock wait; the exit code is the job's,
-  1 on timeout). Watch with `systemctl --user list-units '<prefix>*'` and the log; meanwhile do independent work. Never
+  1 on timeout; the memory limit is a measured or generous bound well under the machine's RAM, so a runaway job dies alone
+  instead of taking other sessions' work; test data never asks for huge sizes to prove a missing bound, use the smallest
+  size that shows it). Watch with `systemctl --user list-units '<prefix>*'` and the log; meanwhile do independent work. Never
   wait with `sleep` chains, timeout-capped polls, or name/pattern checks (`pgrep -f` matches its own shell; `pgrep -x`
   sees other worktrees). Otherwise, wait on an exact PID (`waitpid <pid>`) or output file (`inotifywait`); a waiter must also end when its job exits or fails,
   never only on an expected output string. Before reporting or accepting a delegated task, stop its leftover background
@@ -205,6 +207,9 @@ to that agent. Repository `AGENTS.md`/`CLAUDE.md` rules override these.
   and fix confirmed findings first.
 - Report exact validation evidence and blockers; claim no runtime, deployment, or live success you did not observe.
 - After a fix, lead with `Why it happened` and `How it was fixed`.
+- When told to create a git repository (local or GitHub), always add a `LICENSE` file with the full AGPL-3.0 text
+  (`gh api licenses/agpl-3.0 -q .body`) and declare `AGPL-3.0-only` in the manifest (`license` field); commit it with
+  the first commit. Existing repositories keep their license.
 - Branches: `{type}/{issue-number}/{slug}` or `{type}/{slug}` from `upstream/main`, else `origin/main`. Create and
   remove worktrees with `git gtr` (`git gtr rm <branch> --delete-branch`; check `git gtr version` before installing).
   gtr defaults to the remote default branch, so a lane building on local commits starts with
@@ -232,7 +237,7 @@ to that agent. Repository `AGENTS.md`/`CLAUDE.md` rules override these.
   provenance or unmeasured statistics, no statements of absence (no test, no link, not shown, unknown) unless the
   reader would otherwise assume the thing exists and act on it. Include direct related links when they exist. Load
   `pr-writing` before writing or editing a PR title or body.
-- Before saving or sending prose you wrote (docs, UI copy, artifact text, replies), run the `humanizer` skill's
+- Before saving or sending prose you wrote (docs, UI copy, artifact text, replies), run the `humanizer` skill's (for Korean, `korean-humanizer`)
   checks on it and rewrite every tell, e.g. summary sections restating the intro, closers that only name a reference
   or the point, meanings the source does not state, bold-label bullet lists.
 - Bug reports: symptom and related link first, then repro, environment, logs. Performance PRs: before/after table.
