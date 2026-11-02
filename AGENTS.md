@@ -270,7 +270,8 @@ to that agent. Repository `AGENTS.md`/`CLAUDE.md` rules override these.
   in-flight and merged work against it before dispatching more, and record the result.
 - Before merging a lane, read its diff yourself against the user's principles and the brief, including every
   user-facing string, and drive any changed UI yourself; passing tests and the lane's own reviewer (which checks
-  against your brief) are not acceptance. Record standing user corrections in the repository's `AGENTS.md` so
+  against your brief) are not acceptance. Record standing user corrections in the repository's `AGENTS.md`, each as
+  what the user objected to in their words, never widened from one line into a ban on a word in it, so
   every fresh lane inherits them; a parent-only memory does not reach lanes. Before calling a review or plan done,
   check it answers the level the user asked for (architecture vs line-level).
 - When the session context has been summarized and judgement depends on summaries and reports, write a handoff
