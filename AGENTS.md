@@ -121,6 +121,8 @@ to that agent. Repository `AGENTS.md`/`CLAUDE.md` rules override these.
   distribution licenses before applying a company's policy to another party's product.
 - UI: minimal; no explanatory copy, branding, or motivational text; no border radius, gradients, or animation unless
   requested; no generic state class names shared across components.
+- For a game screen or player text in a genre with open-source references, read their code for the same screen first and
+  name the function; rules distilled from corrections do not replace it.
 - For novice onboarding, research teaching references first; tie each cue to an actionable object, keep the taught
   controls and pace, and validate in the real interaction. Passing tests are not usability evidence.
 - Scripts you write outside a repository's own tooling (setup, IPC reproducers, validation, cleanup, one-off tools)
