@@ -6,7 +6,7 @@ audit:
 install-hooks:
     prek install
 
-# switch the reply persona to persona/<name>.md (eri, villainess, off); without a name, pick one with fzf
+# switch the reply persona to persona/<name>.md (eri, villainess, nagisa, off); without a name, pick one with fzf
 persona name="":
     #!/bin/sh
     set -eu
