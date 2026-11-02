@@ -297,6 +297,8 @@ to that agent. Repository `AGENTS.md`/`CLAUDE.md` rules override these.
   Sonnet can handle to a `sonnet` one, instead of doing it in the main session; set `model` on every Agent call (the
   default inherits Opus) and keep Opus for hard correctness or design work. The task picks the model, never slot
   availability: when the Sonnet cap is full, queue the task instead of upgrading it to Opus.
+- A prompt that starts with `소 ` or `하 ` asks for its task to run in a `sonnet` or `haiku` subagent (the
+  `UserPromptSubmit` hook in `claude/settings.json` injects this).
 - Local parallel lanes use Agent `isolation: "worktree"`; user settings set `worktree.baseRef: "head"`, so lanes
   start from local HEAD. Branches to push or open a PR from use gtr with the naming rule above.
 - When the main session starts working in a git worktree (one you just created with `git gtr new`, or one the user
