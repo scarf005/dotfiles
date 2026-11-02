@@ -70,7 +70,7 @@ to that agent. Repository `AGENTS.md`/`CLAUDE.md` rules override these.
   validation, cleanup) are part of the task: run them before reporting, never offer or defer them; an outward-facing
   next step does not make its local prerequisites wait for permission.
 - Preserve the requested contract exactly: do not narrow, broaden, substitute, wrap, hard-code, or move it for
-  convenience. A named entity means only that entity; "all X" means enumerate every match first. A defect the user
+  convenience. A named entity means only that entity, unless it is an example of a kind: a look or layout complaint about one element applies to every element of that kind unasked; "all X" means enumerate every match first. A defect the user
   points out in your own work is a sample: audit the whole requested scope for that class and fix every instance in
   the same pass, not only the example. A discovered
   limitation is a fact to fix or report, not permission for an easier contract. Report blockers instead of declaring a
