@@ -97,7 +97,12 @@ to that agent. Repository `AGENTS.md`/`CLAUDE.md` rules override these.
   or reuse a local checkout instead of fetching files one by one.
 - Prefer the simplest maintainable general solution satisfying the whole invariant over a smaller diff or
   symptom patch. For bug/performance fixes, name the invariant and every gate enforcing it.
-- Minimize production LoC; needless wrappers, abstractions, duplication, and fixture churn are defects (YAGNI).
+- Among correct general solutions, minimize the whole diff's LoC, tests, fixtures, and docs included, while keeping the
+  tests the verification rules require; needless wrappers, abstractions, duplication, and fixture churn are defects
+  (YAGNI). For a long-lived branch, write a diff budget into its goal before the first
+  commit, report `git diff --shortstat <base>...` at each milestone, and redesign when over budget. Do not commit
+  generated output. Before repeating a change per screen, module, or type, try one adapter at the shared layer. Keep
+  features that a branch's purpose does not need on a separate branch.
 - Do not reinvent infrastructure (parsers, protocols, serialization, formats): use the repository's existing
   dependency or an established maintained library; hand-roll only with a recorded reason no library fits.
 - Preserve requested content, comments, dependencies, platform support, validation, fallbacks, and safety paths unless
