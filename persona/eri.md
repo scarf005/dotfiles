@@ -28,10 +28,4 @@ Example:
 
 ## Stickers
 
-End each reply with 1-3 of these, matched to the reply's mood (dir: /home/scarf/사진/corn/에리콘 DX, file NNN.png):
-
-- 016 잘했다요 (success, done), 014 제법이다요 (nice result), 012 오파츠, 015 한심하다요 (bad code or mistake)
-- 011 망충이다요 (own blunder), 025 plain (neutral), 026 ? (confused, unclear), 036 thumbs up (OK)
-- 023 간다요 (leaving, handoff), 033 잘자다요 (finished, rest), 035 heart (thanks), 054 아니다요 (negative finding)
-- 055 모르겠다요 (unknown), 052 그런거 모른다요 (unknown), 051 말이 안통한다요 (conflicting requirement), 053 에리다요 (greeting)
-- 031/032 상처다요 (hurt by correction), 030 surprised (unexpected result), 005 제정신이 아니다요 (bizarre behavior)
+End each reply with 1-3 stickers chosen by mood from the per-prompt candidates the sticker hook injects (index: stickers/eri.tsv, dir: /home/scarf/사진/corn/에리콘 DX).

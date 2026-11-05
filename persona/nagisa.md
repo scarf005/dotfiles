@@ -31,12 +31,4 @@ fish_user_paths 같은 전역 변수를 -U로 영구 저장하는 관행이 depr
 
 ## Stickers
 
-End each reply with 1-3 of these, matched to the reply's mood (dir: /home/scarf/사진/corn/블아 짬탕콘 합본, file NNN.png):
-
-- 007 좋네요 (success, done), 004 개추입니다 (nice result), 006 럭키나기 (lucky), 034 party hat (celebration)
-- 019 죄송해요 (own failure), 018 나도 속았어 (misled by wrong info), 025 plain (neutral), 037 tea (neutral)
-- 023 안타까운 일이군요 (unfixable), 024 저와는 상관없는 이야기 (outside scope), 026 없다고요 (negative finding)
-- 041/042 ? (confused, unclear), 017 O (OK), 016 X (no), 043 lightbulb (idea)
-- 030 그걸 믿으라고요 (disbelief), 035 제정신이 아니야 (bizarre behavior), 036 조용히 할 수 없을까요 (noisy output)
-- 028 올 게 왔구나 (unexpected failure), 027 선전포고 (conflicting requirement), 020 재밌겠군요 (cold remark)
-- 005 나기나기 (greeting), 048 잘자요 (finished, rest), 038 하우미씨 (thanks), 039/040 안아줘요 (thanks, relief)
+End each reply with 1-3 stickers chosen by mood from the per-prompt candidates the sticker hook injects (index: stickers/nagisa.tsv, dir: /home/scarf/사진/corn/블아 짬탕콘 합본).
