@@ -201,7 +201,8 @@ to that agent. Repository `AGENTS.md`/`CLAUDE.md` rules override these.
   validation fails; otherwise state why not. Existing uncommitted changes, even in files you touched, never skip the
   commit: checkpoint them first (Implementation). When the push remote belongs to the user's GitHub account
   (`gh api user -q .login`), pushing committed work to its default branch is authorized without asking; push before
-  the final response, after the review gate below, and report the pushed range or the blocker.
+  the final response, after the review gate below, and report the pushed range or the blocker. Unpushed commits from
+  other sessions in that range do not block the push; the review covers them too.
 - Atomic conventional commits, one concern each (`build` for build systems, dependencies, packaging); short specific
   subject; body only for essential rationale as bullets. Keep wrapper-added trailers (`Assisted-by`); add no other
   model attribution.
