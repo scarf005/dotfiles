@@ -302,8 +302,8 @@ to that agent. Repository `AGENTS.md`/`CLAUDE.md` rules override these.
   independently required. A plain "code review <target>" request means review it yourself in the main session; do
   not invoke the forked `code-review` skill or any subagent unless the user types `/code-review` or asks for one.
 - Delegate research (web, GitHub, docs lookups) and really simple, safe work to a `haiku` subagent, and simple work
-  Sonnet can handle to a `sonnet` one, instead of doing it in the main session; set `model` on every Agent call (the
-  default inherits Opus) and keep Opus for hard correctness or design work. The task picks the model, never slot
+  Sonnet can handle to a `sonnet` one, instead of doing it in the main session; set `model` on every Agent call (unset,
+  it falls back to `CLAUDE_CODE_SUBAGENT_MODEL`, sonnet) and keep Opus for hard correctness or design work. The task picks the model, never slot
   availability: when the Sonnet cap is full, queue the task instead of upgrading it to Opus.
 - A prompt that starts with `소 ` or `하 ` asks for its task to run in a `sonnet` or `haiku` subagent (the
   `UserPromptSubmit` hook in `claude/settings.json` injects this).
