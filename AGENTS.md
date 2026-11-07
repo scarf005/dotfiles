@@ -313,8 +313,9 @@ to that agent. Repository `AGENTS.md`/`CLAUDE.md` rules override these.
 - When the main session starts working in a git worktree (one you just created with `git gtr new`, or one the user
   names), first switch the session into it with `EnterWorktree` and `path: <worktree path>` (load it via ToolSearch),
   so the working directory, memory and relative paths follow the worktree; do not `cd` or edit it by absolute path
-  from the main checkout. Leave with `ExitWorktree` `action: "keep"` only when the user asks; gtr removal stays
-  `git gtr rm`.
+  from the main checkout. Leave with `ExitWorktree` `action: "keep"` only when the user asks, or for a step that must
+  run in the main checkout (the session's worktree guard refuses it there), then re-enter with `EnterWorktree`
+  `path:` so resume still finds the session in the worktree; gtr removal stays `git gtr rm`.
 - Keep `.claude/context/working-notes.md` (the compact-restore hooks re-inject it after every compaction) current
   as a handoff: after each commit, decision, or job launch, rewrite it with the goal, decisions and rejected options,
   commits, running job IDs, remaining work with blockers, and the next command (`/checkpoint` format, no secrets).
