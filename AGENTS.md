@@ -316,6 +316,11 @@ to that agent. Repository `AGENTS.md`/`CLAUDE.md` rules override these.
   Sonnet can handle to a `sonnet` one, instead of doing it in the main session; set `model` on every Agent call (unset,
   it falls back to `CLAUDE_CODE_SUBAGENT_MODEL`, sonnet) and keep Opus for hard correctness or design work. The task picks the model, never slot
   availability: when the Sonnet cap is full, queue the task instead of upgrading it to Opus.
+- Fable (Mythos-class) sessions are for planning: when the plan is settled, do not implement it; write a detailed
+  handoff for an Opus or Sonnet session to `.claude/context/working-notes.md` and stop. The handoff holds the goal in
+  the user's words, branch and build state, how the current code works with `file:line`, each step with its reason and
+  LoC or perf expectation, open decisions with a default, rejected options, validation and profiling commands,
+  acceptance checks, and the next command. Implement in a Fable session only when the user asks.
 - A prompt that starts with `소 ` or `하 ` asks for its task to run in a `sonnet` or `haiku` subagent (the
   `UserPromptSubmit` hook in `claude/settings.json` injects this).
 - Local parallel lanes use Agent `isolation: "worktree"`; user settings set `worktree.baseRef: "head"`, so lanes
