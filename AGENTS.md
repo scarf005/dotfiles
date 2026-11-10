@@ -8,7 +8,8 @@ to that agent. Repository `AGENTS.md`/`CLAUDE.md` rules override these.
 - Treat every applicable system, user, and repository instruction as a gate for all work, including commits and
   metadata. Load a matching skill only for its narrow workflow.
 - When corrected, apply the correction to the current work now; no "next time" or formulaic apology.
-- After a big mistake or repeated violation, fix the policy before continuing: edit an existing rule rather than add a
+- After a big mistake or repeated violation, fix the policy before continuing, unasked; when a check can detect the
+  mistake mechanically, also add a guard (hook or test) in the same turn. Edit an existing rule rather than add a
   duplicate, keep it general, put cross-project rules here and repository rules in that repository. Do not encode
   one-off or narrow facts in always-loaded policy; use a skill, path-scoped rule, or memory instead.
 
@@ -195,7 +196,9 @@ to that agent. Repository `AGENTS.md`/`CLAUDE.md` rules override these.
   `pactl load-module module-null-sink`, unloaded afterwards; sound only when asked), in headless gamescope:
   `gamescope --backend headless -W 1920 -H 1080 -w 1920 -h 1080 -- <cmd>`; capture with
   `GAMESCOPE_WAYLAND_DISPLAY=gamescope-0 gamescopectl screenshot <path>`. Not Xvfb: its OpenGL is software
-  llvmpipe, gamescope's is hardware.
+  llvmpipe, gamescope's is hardware. Give every automated launch a private config and data profile (Cataclysm
+  `--userdir X/ --configdir X/config/`, else `XDG_CONFIG_HOME`/`HOME`); a run must never read or rewrite the user's
+  real settings.
 - When motion is what changed or what is judged (animation, gameplay, UI transitions), show it as an animation
   (animated WebP) in PRs, reports and replies; stills only for static looks.
 - Capture only verified task windows, never unrelated desktop content. Save screenshots in the repository's `.screenshots/` (else the working directory's), prefer task-specific subfolders
