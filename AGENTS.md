@@ -90,7 +90,9 @@ to that agent. Repository `AGENTS.md`/`CLAUDE.md` rules override these.
 - Remove scratch output you generate (`__pycache__`, caches) or add it to the repository's `.gitignore` before
   finishing; never leave it untracked.
 - Delete files or directories only with `gio trash`, never `rm`; and only when deletion is needed (overwriting or
-  leaving ignored scratch output is not a reason).
+  leaving ignored scratch output is not a reason). Paths under `/tmp` (scratchpad, test output) use
+  `tmp-rm [--dry-run] [--] /tmp/PATH...` instead: absolute `/tmp/a/b` paths without `.` or `..`, tmpfs only, symlinks
+  are unlinked, never followed.
 - Bulk move/delete loops: print the selected set first (dry run) and check every keep-filter on it; pass data-derived
   patterns after `-e`/`--` so a leading `-` is not parsed as a flag (a failing filter must keep, not select).
 - Read relevant code first; plan multi-file changes. For remote code that needs cross-file tracing or history, clone
@@ -184,11 +186,18 @@ to that agent. Repository `AGENTS.md`/`CLAUDE.md` rules override these.
 - Isolate Git fixture subprocesses from inherited `GIT_*` variables and user/global config.
 - Web projects: test with `playwright-cli`; set up a `prek` pre-commit hook (format, lint, types, tests) when
   configuring a project's test workflow. Deno: follow the Deno testing, snapshot, and fast-check docs.
-- Launch GUI apps and games for automated runs off the live desktop and muted (`PULSE_SINK=<null sink>` from
+- Run games and GUI apps headless (`godot --headless`, or the engine's equivalent) whenever the run needs no
+  rendered frame. Never let an automated run open a window on the live desktop, where it takes the user's mouse
+  focus; a repository rule naming `xvfb-run` does not override this (with `WAYLAND_DISPLAY` set, the app still opens
+  on the desktop). Prefix every command that can start the app, wrappers and test recipes included, with
+  `env -u WAYLAND_DISPLAY -u DISPLAY`, so a run that would open a window fails instead, and give delegated agents
+  the same prefix. Launch runs that need frames off the live desktop and muted (`PULSE_SINK=<null sink>` from
   `pactl load-module module-null-sink`, unloaded afterwards; sound only when asked), in headless gamescope:
   `gamescope --backend headless -W 1920 -H 1080 -w 1920 -h 1080 -- <cmd>`; capture with
   `GAMESCOPE_WAYLAND_DISPLAY=gamescope-0 gamescopectl screenshot <path>`. Not Xvfb: its OpenGL is software
   llvmpipe, gamescope's is hardware.
+- When motion is what changed or what is judged (animation, gameplay, UI transitions), show it as an animation
+  (animated WebP) in PRs, reports and replies; stills only for static looks.
 - Capture only verified task windows, never unrelated desktop content. Save screenshots in the repository's `.screenshots/` (else the working directory's), prefer task-specific subfolders
   over placing files directly in `.screenshots/`, and show relevant ones with paths.
 - Review the final diff against the acceptance criteria for contract compliance, correctness, and needless machinery,
@@ -250,7 +259,8 @@ to that agent. Repository `AGENTS.md`/`CLAUDE.md` rules override these.
   or the point, meanings the source does not state, bold-label bullet lists.
 - Bug reports: symptom and related link first, then repro, environment, logs. Performance PRs: before/after table.
 - Player-facing docs lead with visible gameplay consequences.
-- Images committed to a repository (README previews, docs): WebP at quality 50.
+- Images committed to a repository (README previews, docs): WebP at quality 50-75. When you write or edit the README of
+  a personal repository, include at least one such WebP screenshot of the project in use.
 
 ## Tools and environment
 
