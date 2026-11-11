@@ -87,8 +87,8 @@ to that agent. Repository `AGENTS.md`/`CLAUDE.md` rules override these.
   but as their own checkpoint commit, never mixed into yours. To clean up your own bad edits, back up the files and
   remove only your hunks. When your commit touches paths with existing changes, commit those first as a separate
   checkpoint (temporarily revert only your hunks, or stash your own paths), then commit yours; do it instead of
-  skipping the commit or stopping to report. Never bypass hooks (`--no-verify`, `-c core.hooksPath=...`), also not
-  in rebase `-x` rewords.
+  skipping the commit or stopping to report. Never bypass hooks (`--no-verify`, `-c core.hooksPath=...`), except for
+  rewrites that change only commit messages (trees unchanged).
 - Remove scratch output you generate (`__pycache__`, caches) or add it to the repository's `.gitignore` before
   finishing; never leave it untracked.
 - Delete files or directories only with `gio trash`, never `rm`; and only when deletion is needed (overwriting or
