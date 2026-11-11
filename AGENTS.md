@@ -178,7 +178,7 @@ to that agent. Repository `AGENTS.md`/`CLAUDE.md` rules override these.
   reported gameplay, UI, visual, data, or media issues, reproduce the reported state through the production path,
   capture it before and after, and inspect the capture at the reported and adjacent viewports. A passing unit test is
   not evidence that a reported symptom is gone.
-- Failed, skipped, and errored tests never count as passing. Call a failure pre-existing only after reproducing it on
+- Failed, skipped, and errored tests, and runs that selected zero tests, never count as passing. Call a failure pre-existing only after reproducing it on
   the base revision. Fix failures in touched files before completion.
 - For CI, release, platform, build, or live-site changes, run the matching real workflow (a fork or sandbox counts) on
   the final revision, including every edit, retry, and failure path, before opening or updating a PR as ready. Naming
