@@ -87,7 +87,8 @@ to that agent. Repository `AGENTS.md`/`CLAUDE.md` rules override these.
   but as their own checkpoint commit, never mixed into yours. To clean up your own bad edits, back up the files and
   remove only your hunks. When your commit touches paths with existing changes, commit those first as a separate
   checkpoint (temporarily revert only your hunks, or stash your own paths), then commit yours; do it instead of
-  skipping the commit or stopping to report. Never use `--no-verify`.
+  skipping the commit or stopping to report. Never bypass hooks (`--no-verify`, `-c core.hooksPath=...`), also not
+  in rebase `-x` rewords.
 - Remove scratch output you generate (`__pycache__`, caches) or add it to the repository's `.gitignore` before
   finishing; never leave it untracked.
 - Delete files or directories only with `gio trash`, never `rm`; and only when deletion is needed (overwriting or
@@ -220,8 +221,9 @@ to that agent. Repository `AGENTS.md`/`CLAUDE.md` rules override these.
   model attribution.
 - Before each commit, check `git status --short` and `git diff --cached --name-status`; abort if unrelated or
   user-owned paths are staged. Verify `HEAD` before amend; recheck `git log -1` before claiming a commit.
-- Never run `git restore`, `git checkout --`, or `git reset --hard` on tracked files the user did not name. Never
-  force-push without permission. Reverts name the commits and the reason.
+- Never run `git restore`, `git checkout --`, or `git reset --hard` on tracked files the user did not name. Force-push
+  (`--force-with-lease` pinned to the expected remote SHA) is always allowed on non-default branches; never on the
+  default branch (settings.json denies it). Reverts name the commits and the reason.
 - Before publishing, squash your iterations of one concern into one commit. Before opening a PR, after each later
   push to it, and before pushing to a default branch, run an independent correctness review of the unreviewed range
   and fix confirmed findings first.
