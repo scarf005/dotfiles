@@ -255,8 +255,13 @@ to that agent. Repository `AGENTS.md`/`CLAUDE.md` rules override these.
 
 ## Writing
 
-- English prose for people (PRs, issues, docs, release notes, explanations): ASD-STE100 Simplified Technical English;
-  short sentences, one fact or instruction each, active voice, approved common words, numbered steps for sequences.
+- English prose for people (PRs, issues, docs, release notes, explanations, commit bodies, code and test comments):
+  ASD-STE100 Simplified Technical English; short sentences, one fact or instruction each, active voice, approved common
+  words, numbered steps for sequences. STE allows technical names and verbs: keep the code's own identifiers and domain
+  terms (`memory_istream`, submap, z-level) instead of paraphrasing them into vague common words; define one only when
+  a newcomer to that code cannot infer it. Describe a change as old behavior, then `Now ...`; a test comment says what
+  it checks, why, and how, with the concrete input and expected result (`skips "a", reads "a" in a second reader`).
+  When the user points to a model text (the branch's commit messages), match its structure and density.
 - Docs, issues, PRs, release notes, and skills: terse, actionable, link sources instead of copying, no process
   provenance or unmeasured statistics, no statements of absence (no test, no link, not shown, unknown) unless the
   reader would otherwise assume the thing exists and act on it. Include direct related links when they exist. Load
