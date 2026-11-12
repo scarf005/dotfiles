@@ -138,8 +138,7 @@ to that agent. Repository `AGENTS.md`/`CLAUDE.md` rules override these.
   controls and pace, and validate in the real interaction. Passing tests are not usability evidence.
 - Scripts you write outside a repository's own tooling (setup, IPC reproducers, validation, cleanup, one-off tools)
   are single-file Cargo scripts: `cargo +nightly -Zscript <file>.rs` with a `---` frontmatter manifest. Repository
-  code and tooling keep the repository's language. Carry this constraint into delegated continuations
-  and inspect executed commands before acceptance. Missing APIs/permissions do not authorize a Python/shell driver or
+  code and tooling keep the repository's language. Missing APIs/permissions do not authorize a Python/shell driver or
   interpreter switch; use a compatible bounded native utility or report the blocker.
 - XDG paths; add needed env vars to `~/.fish/config/conf.d/xdg.fish`.
 
@@ -190,22 +189,9 @@ to that agent. Repository `AGENTS.md`/`CLAUDE.md` rules override these.
 - Isolate Git fixture subprocesses from inherited `GIT_*` variables and user/global config.
 - Web projects: test with `playwright-cli`; set up a `prek` pre-commit hook (format, lint, types, tests) when
   configuring a project's test workflow. Deno: follow the Deno testing, snapshot, and fast-check docs.
-- Run games and GUI apps headless (`godot --headless`, or the engine's equivalent) whenever the run needs no
-  rendered frame. Never let an automated run open a window on the live desktop, where it takes the user's mouse
-  focus; a repository rule naming `xvfb-run` does not override this (with `WAYLAND_DISPLAY` set, the app still opens
-  on the desktop). Prefix every command that can start the app, wrappers and test recipes included, with
-  `env -u WAYLAND_DISPLAY -u DISPLAY`, so a run that would open a window fails instead, and give delegated agents
-  the same prefix. Launch runs that need frames off the live desktop and muted (`PULSE_SINK=<null sink>` from
-  `pactl load-module module-null-sink`, unloaded afterwards; sound only when asked), in headless gamescope:
-  `gamescope --backend headless -W 1920 -H 1080 -w 1920 -h 1080 -- <cmd>`; capture with
-  `GAMESCOPE_WAYLAND_DISPLAY=gamescope-0 gamescopectl screenshot <path>`. Not Xvfb: its OpenGL is software
-  llvmpipe, gamescope's is hardware. Give every automated launch a private config and data profile (Cataclysm
-  `--userdir X/ --configdir X/config/`, else `XDG_CONFIG_HOME`/`HOME`); a run must never read or rewrite the user's
-  real settings.
-- When motion is what changed or what is judged (animation, gameplay, UI transitions), show it as an animation
-  (animated WebP) in PRs, reports and replies; stills only for static looks.
-- Capture only verified task windows, never unrelated desktop content. Save screenshots in the repository's `.screenshots/` (else the working directory's), prefer task-specific subfolders
-  over placing files directly in `.screenshots/`, and show relevant ones with paths.
+- Never let an automated run open a window on the live desktop: prefix every command that can start a game or GUI app,
+  wrappers and test recipes included, with `env -u WAYLAND_DISPLAY -u DISPLAY`. Load `gui-capture` before a run that
+  needs rendered frames, screenshots or recordings.
 - Review the final diff against the acceptance criteria for contract compliance, correctness, and needless machinery,
   and check every output and consumer of the changed component (logs, annotations, comments, UI), not only the one
   reported. Every behavior a commit message claims needs a test in that commit that exercises it.
@@ -231,9 +217,7 @@ to that agent. Repository `AGENTS.md`/`CLAUDE.md` rules override these.
   and fix confirmed findings first.
 - Report exact validation evidence and blockers; claim no runtime, deployment, or live success you did not observe.
 - After a fix, lead with `Why it happened` and `How it was fixed`.
-- When told to create a git repository (local or GitHub), always add a `LICENSE` file with the full AGPL-3.0 text
-  (`gh api licenses/agpl-3.0 -q .body`) and declare `AGPL-3.0-only` in the manifest (`license` field); commit it with
-  the first commit. Existing repositories keep their license.
+- Load `personal-repo` before creating a git repository (AGPL-3.0 license) or writing a personal repository's README.
 - Branches: `{type}/{issue-number}/{slug}` or `{type}/{slug}` from `upstream/main`, else `origin/main`. Create and
   remove worktrees with `git gtr` (`git gtr rm <branch> --delete-branch`; check `git gtr version` before installing).
   gtr defaults to the remote default branch, so a lane building on local commits starts with
@@ -243,13 +227,7 @@ to that agent. Repository `AGENTS.md`/`CLAUDE.md` rules override these.
 
 - Use `gh`. Never comment on GitHub unless asked. Judge whether a PR touched a file from its file list and diff.
 - When asked to open/update a PR, finish and report the URL or the exact blocking command and output.
-- Use `.github/pull_request_template.md` when present; fill only required fields with concrete bullets (no `N/A`),
-  include concrete testing steps and expected results, player-facing titles when changelog rules require it.
-- Before writing a PR body, search related issues/PRs with `gh search` and link them; `close #N` (including open
-  subissues) before full URLs.
-- Before editing an existing PR/issue, save its current body and patch minimally, preserving human prose,
-  checklists, media, and generated blocks; check a body-only diff. Replace stale bullets after follow-ups.
-- Web UI PRs: attach `playwright-cli` screenshots as GitHub attachments or external URLs; never commit media unasked.
+- Load `pr-writing` before writing or editing a PR title or body, or an existing issue body.
 - After opening a PR, push follow-ups only when asked. Watch checks only after pushing code; for Cataclysm-BN use
   `gh pr checks --watch --interval 600`. For CI auth failures, compare the same step on recent PRs first.
 
@@ -264,15 +242,13 @@ to that agent. Repository `AGENTS.md`/`CLAUDE.md` rules override these.
   When the user points to a model text (the branch's commit messages), match its structure and density.
 - Docs, issues, PRs, release notes, and skills: terse, actionable, link sources instead of copying, no process
   provenance or unmeasured statistics, no statements of absence (no test, no link, not shown, unknown) unless the
-  reader would otherwise assume the thing exists and act on it. Include direct related links when they exist. Load
-  `pr-writing` before writing or editing a PR title or body.
+  reader would otherwise assume the thing exists and act on it. Include direct related links when they exist.
 - Before saving or sending prose you wrote (docs, UI copy, artifact text, replies), run the `humanizer` skill's (for Korean, `korean-humanizer`)
   checks on it and rewrite every tell, e.g. summary sections restating the intro, closers that only name a reference
   or the point, meanings the source does not state, bold-label bullet lists.
 - Bug reports: symptom and related link first, then repro, environment, logs. Performance PRs: before/after table.
 - Player-facing docs lead with visible gameplay consequences.
-- Images committed to a repository (README previews, docs): WebP at quality 50-75. When you write or edit the README of
-  a personal repository, include at least one such WebP screenshot of the project in use.
+- Images committed to a repository (README previews, docs): WebP at quality 50-75.
 
 ## Tools and environment
 
@@ -289,34 +265,8 @@ to that agent. Repository `AGENTS.md`/`CLAUDE.md` rules override these.
 
 ## Delegation
 
-- Write subagent briefs and agent-to-agent messages in English (fewer tokens); only user-visible text is Korean.
-- When orchestrating lanes, the parent plans, dispatches, integrates and verifies; delegate investigation and fixes
-  of new problems to a lane at once instead of debugging them in the parent while lanes sit idle. Direction comes
-  before throughput: keep a written backlog and refill lanes from it when a lane reports, but only with work whose
-  direction is settled; never dispatch implementation that depends on an open design or architecture question
-  (including one the user just asked to review).
-- A backlog or audit entry is not authority: before dispatching, check each item against the repository rules and
-  the user's stated principles, and drop or reclassify conflicts. When the user states a new principle, re-check all
-  in-flight and merged work against it before dispatching more, and record the result.
-- Before merging a lane, read its diff yourself against the user's principles and the brief, including every
-  user-facing string, and drive any changed UI yourself; passing tests and the lane's own reviewer (which checks
-  against your brief) are not acceptance. Record standing user corrections in the repository's `AGENTS.md`, each as
-  what the user objected to in their words, never widened from one line into a ban on a word in it, so
-  every fresh lane inherits them; a parent-only memory does not reach lanes. Before calling a review or plan done,
-  check it answers the level the user asked for (architecture vs line-level).
-- When the session context has been summarized and judgement depends on summaries and reports, write a handoff
-  document (decisions, state, open questions, next steps) and recommend continuing in a fresh session.
-- Verify the child's effective role, model, tools, permissions, and working directory from real metadata before
-  relying on them.
-- Give the task, constraints, readable sources/diffs/logs (a commit ID is not readable for a tool-restricted child),
-  and acceptance checks; preflight input paths. A controller continuation needs its exact execution command and
-  scoped permissions. Inspect enforcement before claiming a reused guard supplies quotas or deadlines.
-- A completion notification is not acceptance: require the final answer with evidence (tool observations, actual diff
-  and validation). Resume the same child for missing work; do not duplicate it in the parent.
-- Parallel children share the machine: give each its own worktree, let only one run the full suite at a time, and
-  run the final full suite once in the parent after merging.
-- Token budget: run at most 3–4 children at once with file-disjoint scopes; after a child's task is accepted, start
-  the next task in a fresh child with a short brief instead of resuming the long one.
+- Load `delegation` before spawning a subagent, messaging another agent, dispatching or merging lanes, or handing off
+  a summarized session. Briefs and agent-to-agent messages are English.
 
 ## Claude Code
 
@@ -328,21 +278,13 @@ to that agent. Repository `AGENTS.md`/`CLAUDE.md` rules override these.
   Sonnet can handle to a `sonnet` one, instead of doing it in the main session; set `model` on every Agent call (unset,
   it falls back to `CLAUDE_CODE_SUBAGENT_MODEL`, sonnet) and keep Opus for hard correctness or design work. The task picks the model, never slot
   availability: when the Sonnet cap is full, queue the task instead of upgrading it to Opus.
-- Fable (Mythos-class) sessions are for planning: when the plan is settled, do not implement it; write a detailed
-  handoff for an Opus or Sonnet session to `.claude/context/working-notes.md` and stop. The handoff holds the goal in
-  the user's words, branch and build state, how the current code works with `file:line`, each step with its reason and
-  LoC or perf expectation, open decisions with a default, rejected options, validation and profiling commands,
-  acceptance checks, and the next command. Implement in a Fable session only when the user asks.
+- Fable (Mythos-class) sessions plan and do not implement unless the user asks; load `fable-handoff` when the plan is
+  settled.
 - A prompt that starts with `소 ` or `하 ` asks for its task to run in a `sonnet` or `haiku` subagent (the
   `UserPromptSubmit` hook in `claude/settings.json` injects this).
 - Local parallel lanes use Agent `isolation: "worktree"`; user settings set `worktree.baseRef: "head"`, so lanes
   start from local HEAD. Branches to push or open a PR from use gtr with the naming rule above.
-- When the main session starts working in a git worktree (one you just created with `git gtr new`, or one the user
-  names), first switch the session into it with `EnterWorktree` and `path: <worktree path>` (load it via ToolSearch),
-  so the working directory, memory and relative paths follow the worktree; do not `cd` or edit it by absolute path
-  from the main checkout. Leave with `ExitWorktree` `action: "keep"` only when the user asks, or for a step that must
-  run in the main checkout (the session's worktree guard refuses it there), then re-enter with `EnterWorktree`
-  `path:` so resume still finds the session in the worktree; gtr removal stays `git gtr rm`.
+- When the main session starts working in a git worktree, load `enter-worktree` first.
 - Keep `.claude/context/working-notes.md` (the compact-restore hooks re-inject it after every compaction) current
   as a handoff: after each commit, decision, or job launch, rewrite it with the goal, decisions and rejected options,
   commits, running job IDs, remaining work with blockers, and the next command (`/checkpoint` format, no secrets).
