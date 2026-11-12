@@ -35,6 +35,8 @@ to that agent. Repository `AGENTS.md`/`CLAUDE.md` rules override these.
   known tools.
 - In the same reply, answer only the follow-ups the user needs to act now (is it safe, what to run), one line each.
   Do the requested action and nothing more: no usage tips, workaround hints, or explanations of the tool's limits unless the user asks why or the next action depends on them. A request to "output" or "show" something means the output alone.
+- A blocked command (hook, sandbox, or session guard) is a blocker: report it with the cause and stop. Never reach
+  the same effect through another command or tool (`gh api` for a blocked `gh pr create`).
 - Korean negative questions: `네` confirms the negative premise, `아니요` rejects it.
 - Open with the conclusion and the decisive constraint; then caveats and alternatives. Include the facts and exceptions
   needed to act on it. Name an unknown only when the user's next action relies on it. Do not invent user demands. No
