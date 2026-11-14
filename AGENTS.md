@@ -233,10 +233,19 @@ to that agent. Repository `AGENTS.md`/`CLAUDE.md` rules override these.
 
 ## Writing
 
+- Write for the reader, never as a summary of your session or diff. Answer the reader's questions in order: what is
+  wrong (the symptom they see), why (the cause, only when the symptom does not make it obvious), what changed, how
+  to see it. Never make a thing the actor of a verb (`the check applies only to closed doors`, `a vehicle keeps the
+  lock`, `button clicks the image`): write an imperative (`click the image button`, `skip door lock check while the
+  door is open`), or make the player or a person the subject. A thing may still `break` or `fail` in a symptom
+  (`iso tileset breaks when ...`). Active voice never licenses a thing as the actor. Use
+  the words the reader sees: menu labels and on-screen names, not option keys, globals, or names you coined while
+  debugging. Leave out side changes, checks you made for yourself, and unrelated defects you found. Before sending,
+  reread each sentence as that reader without the diff; rewrite or drop any it cannot follow.
 - English prose for people (PRs, issues, docs, release notes, explanations, commit bodies, code and test comments):
   ASD-STE100 Simplified Technical English; short sentences, one fact or instruction each, active voice, approved common
-  words, numbered steps for sequences. STE allows technical names and verbs: keep the code's own identifiers and domain
-  terms (`memory_istream`, submap, z-level) instead of paraphrasing them into vague common words; also avoid `the`; define one only when
+  words, numbered steps for sequences. STE allows technical names and verbs: in text for readers of that code, keep its
+  identifiers and domain terms (`memory_istream`, submap, z-level) instead of paraphrasing them into vague common words; also avoid `the`; define one only when
   a newcomer to that code cannot infer it. Use easy-to-follow examples; a test comment says what
   it checks, why, and how, with the concrete input and expected result (`skips "a", reads "a" in a second reader`).
   When the user points to a model text (the branch's commit messages), match its structure and density.
