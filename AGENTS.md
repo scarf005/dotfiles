@@ -228,8 +228,10 @@ to that agent. Repository `AGENTS.md`/`CLAUDE.md` rules override these.
 - Use `gh`. Never comment on GitHub unless asked. Judge whether a PR touched a file from its file list and diff.
 - When asked to open/update a PR, finish and report the URL or the exact blocking command and output.
 - Load `pr-writing` before writing or editing a PR title or body, or an existing issue body.
-- After opening a PR, push follow-ups only when asked. Watch checks only after pushing code; for Cataclysm-BN use
-  `gh pr checks --watch --interval 600`. For CI auth failures, compare the same step on recent PRs first.
+- After opening a PR, push follow-ups only when asked. After every push to a PR you opened, watch its checks without
+  spending tokens: one tracked background shell that exits only on the result
+  (`gh pr checks <pr> --watch --fail-fast --interval 600`), never model-turn polling. For CI auth failures, compare
+  the same step on recent PRs first.
 
 ## Writing
 
