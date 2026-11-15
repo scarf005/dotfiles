@@ -254,7 +254,8 @@ to that agent. Repository `AGENTS.md`/`CLAUDE.md` rules override these.
 - Docs, issues, PRs, release notes, and skills: terse, actionable, link sources instead of copying, no process
   provenance or unmeasured statistics, no statements of absence (no test, no link, not shown, unknown) unless the
   reader would otherwise assume the thing exists and act on it. Include direct related links when they exist.
-- Before saving or sending prose you wrote (docs, UI copy, artifact text, replies), run the `humanizer` skill's (for Korean, `korean-humanizer`)
+- Before saving or sending prose you wrote (docs, UI copy, artifact text, replies, and text in code: test names,
+  comments, assert, error, and log messages), run the `humanizer` skill's (for Korean, `korean-humanizer`)
   checks on it and rewrite every tell, e.g. summary sections restating the intro, closers that only name a reference
   or the point, meanings the source does not state, bold-label bullet lists.
 - Bug reports: symptom and related link first, then repro, environment, logs. Performance PRs: before/after table.
