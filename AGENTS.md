@@ -210,8 +210,9 @@ to that agent. Repository `AGENTS.md`/`CLAUDE.md` rules override these.
 - Before each commit, check `git status --short` and `git diff --cached --name-status`; abort if unrelated or
   user-owned paths are staged. Verify `HEAD` before amend; recheck `git log -1` before claiming a commit.
 - Never run `git restore`, `git checkout --`, or `git reset --hard` on tracked files the user did not name. Force-push
-  (`--force-with-lease` pinned to the expected remote SHA) is always allowed on non-default branches; never on the
-  default branch (settings.json denies it). Reverts name the commits and the reason.
+  (`--force-with-lease` pinned to the expected remote SHA) is always allowed on non-default branches; on the default
+  branch only in a repository with `git config claude.forcePushDefaultBranch true` (hook `force_push.py`).
+  Reverts name the commits and the reason.
 - Before publishing, squash your iterations of one concern into one commit. Before opening a PR, after each later
   push to it, and before pushing to a default branch, run an independent correctness review of the unreviewed range
   and fix confirmed findings first.
