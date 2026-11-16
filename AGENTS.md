@@ -297,6 +297,9 @@ to that agent. Repository `AGENTS.md`/`CLAUDE.md` rules override these.
 - Local parallel lanes use Agent `isolation: "worktree"`; user settings set `worktree.baseRef: "head"`, so lanes
   start from local HEAD. Branches to push or open a PR from use gtr with the naming rule above.
 - When the main session starts working in a git worktree, load `enter-worktree` first.
+- Commands in `sandbox.excludedCommands` (`gio`, `systemctl`, `systemd-run`, `flock`, `gh`, ...) leave the sandbox
+  only when the Bash call is that command alone: no `cd`, `;`, `&&`, or pipe; use absolute paths. Inside the sandbox,
+  `gio trash` fails with EXDEV because each writable path is its own bind mount.
 - Keep `.claude/context/working-notes.md` (the compact-restore hooks re-inject it after every compaction) current
   as a handoff: after each commit, decision, or job launch, rewrite it with the goal, decisions and rejected options,
   commits, running job IDs, remaining work with blockers, and the next command (`/checkpoint` format, no secrets).
