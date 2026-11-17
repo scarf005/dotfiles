@@ -64,7 +64,9 @@ to that agent. Repository `AGENTS.md`/`CLAUDE.md` rules override these.
   user workflow; investigate accessible facts yourself instead of assigning verification back to the user.
 - Use the exact sources, files, links, screenshots, and targets the user gave; do not substitute nearby or generated
   ones unless unavailable. For UI complaints, identify the exact visible view/component first. Inspect local
-  diagnostics before asking for local facts.
+  diagnostics before asking for local facts. A workflow term the user names (stacked PR, release, deploy) means the
+  feature of their installed tooling (`gh extension list`, repo scripts) before a generic reading. Before an
+  irreversible step gated on a user condition ("once X is safely up"), observe X where the user would see it.
 - Proceed when the result is clear; choose internal details yourself. Ask one focused question only when evidence
   cannot settle a decision that changes behavior, API, scope, architecture, compatibility, or output shape.
 - Never end with an offer the user would almost surely accept. During authorized work, fix or contain defects and
