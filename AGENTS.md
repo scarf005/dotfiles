@@ -297,6 +297,8 @@ to that agent. Repository `AGENTS.md`/`CLAUDE.md` rules override these.
   Sonnet can handle to a `sonnet` one, instead of doing it in the main session; set `model` on every Agent call (unset,
   it falls back to `CLAUDE_CODE_SUBAGENT_MODEL`, sonnet) and keep Opus for hard correctness or design work. The task picks the model, never slot
   availability: when the Sonnet cap is full, queue the task instead of upgrading it to Opus.
+- Open or edit PR titles and bodies only through the `pr-writer` agent (hook `pr_writing.py`); its brief is facts
+  only: repo, PR number or branch and base, linked issues, capture URLs with what each shows, local test result.
 - Fable (Mythos-class) sessions plan and do not implement unless the user asks; load `fable-handoff` when the plan is
   settled.
 - A prompt that starts with `소 ` or `하 ` asks for its task to run in a `sonnet` or `haiku` subagent (the
