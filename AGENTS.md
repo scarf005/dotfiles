@@ -106,7 +106,9 @@ to that agent. Repository `AGENTS.md`/`CLAUDE.md` rules override these.
 - Read relevant code first; plan multi-file changes. For remote code that needs cross-file tracing or history, clone
   or reuse a local checkout instead of fetching files one by one.
 - Prefer the simplest maintainable general solution satisfying the whole invariant over a smaller diff or
-  symptom patch. For bug/performance fixes, name the invariant and every gate enforcing it.
+  symptom patch. For bug/performance fixes, name the invariant and every gate enforcing it. Performance work
+  starts from a measured breakdown of the whole wall time (every step, queue waits, cache hit rates and miss
+  reasons), works largest share first, and reports the shares left unaddressed.
 - Among correct general solutions, minimize the whole diff's LoC, tests, fixtures, and docs included, while keeping the
   tests the verification rules require; needless wrappers, abstractions, duplication, and fixture churn are defects
   (YAGNI). For a long-lived branch, write a diff budget into its goal before the first
