@@ -152,6 +152,8 @@ to that agent. Repository `AGENTS.md`/`CLAUDE.md` rules override these.
 
 - Unless the repository differs: functional style, TypeScript options objects for 3+ arguments, C++ structs,
   single-line arrow functions, readable ternaries.
+- Rust: edition 2024 in every crate and Cargo script manifest, never 2021 (a repository on 2021 is migrated with
+  `cargo fix --edition`).
 - Preact: `@preact/signals` or deepsignal; hooks only when required.
 - YAML: inline short maps/lists (`env: { FOO: bar }`).
 
