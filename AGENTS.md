@@ -223,7 +223,8 @@ to that agent. Repository `AGENTS.md`/`CLAUDE.md` rules override these.
   (`--force-with-lease` pinned to the expected remote SHA) is always allowed on non-default branches; on the default
   branch only in a repository with `git config claude.forcePushDefaultBranch true` (hook `force_push.py`).
   Reverts name the commits and the reason.
-- Before publishing, squash your iterations of one concern into one commit. Before opening a PR, after each later
+- Before publishing, squash your iterations of one concern into one commit. Never amend or squash into a commit
+  another author wrote; add yours on top (hook `amend_author.py`). Before opening a PR, after each later
   push to it, and before pushing to a default branch, run an independent correctness review of the unreviewed range
   and fix confirmed findings first.
 - Report exact validation evidence and blockers; claim no runtime, deployment, or live success you did not observe.
