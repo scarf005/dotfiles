@@ -112,7 +112,9 @@ to that agent. Repository `AGENTS.md`/`CLAUDE.md` rules override these.
 - Among correct general solutions, minimize the whole diff's LoC, tests, fixtures, and docs included, while keeping the
   tests the verification rules require; needless wrappers, abstractions, duplication, and fixture churn are defects
   (YAGNI). For a long-lived branch, write a diff budget into its goal before the first
-  commit, report `git diff --shortstat <base>...` at each milestone, and redesign when over budget. Do not commit
+  commit, report `git diff --shortstat <base>...` at each milestone, and redesign when over budget. The budget is a
+  number of added lines sized to the measured gain or the defect, tests and tooling included; write it into every
+  lane brief and send an over-budget result back instead of accepting it. Do not commit
   generated output. Before repeating a change per screen, module, or type, try one adapter at the shared layer. Keep
   features that a branch's purpose does not need on a separate branch.
 - Do not reinvent infrastructure (parsers, protocols, serialization, formats): use the repository's existing
@@ -236,6 +238,9 @@ to that agent. Repository `AGENTS.md`/`CLAUDE.md` rules override these.
 
 - Use `gh`. Never comment on GitHub unless asked. Judge whether a PR touched a file from its file list and diff.
 - When asked to open/update a PR, finish and report the URL or the exact blocking command and output.
+- One PR per change a reviewer judges on its own (a standalone fix, a different risk or owner). Work steps, lanes,
+  issues, and commits are not PR borders: fixes of one defect or changes of one kind share a PR. Before opening
+  more than 3 PRs for one goal, show the user the split with additions per PR (hook `stack_size.py`).
 - Load `pr-writing` before writing or editing a PR title or body, or an existing issue body.
 - After opening a PR, push follow-ups only when asked. After every push to a PR you opened, watch its checks without
   spending tokens: one tracked background shell that exits only on the result
