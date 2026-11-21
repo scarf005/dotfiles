@@ -215,7 +215,7 @@ to that agent. Repository `AGENTS.md`/`CLAUDE.md` rules override these.
 - Commit validated changes before the final response unless forbidden, read-only, or your own
   validation fails; otherwise state why not. Existing uncommitted changes, even in files you touched, never skip the
   commit: checkpoint them first (Implementation). When the push remote belongs to the user's GitHub account
-  (`gh api user -q .login`), pushing committed work to its default branch is authorized without asking; push before
+  (`gh api user -q .login`) or the repository sets `git config claude.pushDefaultBranch true`, pushing committed work to its default branch is authorized without asking; push before
   the final response, after the review gate below, and report the pushed range or the blocker. Unpushed commits from
   other sessions in that range do not block the push; the review covers them too.
 - Atomic conventional commits, one concern each (`build` for build systems, dependencies, packaging); short specific
