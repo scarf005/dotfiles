@@ -147,9 +147,11 @@ to that agent. Repository `AGENTS.md`/`CLAUDE.md` rules override these.
 - For novice onboarding, research teaching references first; tie each cue to an actionable object, keep the taught
   controls and pace, and validate in the real interaction. Passing tests are not usability evidence.
 - Scripts you write outside a repository's own tooling (setup, IPC reproducers, validation, cleanup, one-off tools)
-  are single-file Cargo scripts: `cargo +nightly -Zscript <file>.rs` with a `---` frontmatter manifest. Repository
-  code and tooling keep the repository's language. Missing APIs/permissions do not authorize a Python/shell driver or
-  interpreter switch; use a compatible bounded native utility or report the blocker.
+  use a traditional scripting language (bash, fish, Python, TypeScript), whichever is simplest for the job; use a
+  single-file Cargo script (`cargo +nightly -Zscript <file>.rs` with a `---` frontmatter manifest) only when the
+  task needs Rust. Repository code and tooling keep the repository's language. Missing APIs/permissions do not
+  authorize an interpreter switch inside a repository's own tooling; use a compatible bounded native utility or
+  report the blocker.
 - XDG paths; add needed env vars to `~/.fish/config/conf.d/xdg.fish`.
 
 ## Coding conventions
