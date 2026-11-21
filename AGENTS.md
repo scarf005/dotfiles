@@ -108,7 +108,9 @@ to that agent. Repository `AGENTS.md`/`CLAUDE.md` rules override these.
 - Prefer the simplest maintainable general solution satisfying the whole invariant over a smaller diff or
   symptom patch. For bug/performance fixes, name the invariant and every gate enforcing it. Performance work
   starts from a measured breakdown of the whole wall time (every step, queue waits, cache hit rates and miss
-  reasons), works largest share first, and reports the shares left unaddressed.
+  reasons), works largest share first, and reports the shares left unaddressed. Judge a change's gain as absolute
+  time on the current baseline, never by a percentage taken on another baseline; measure a removal of performance
+  code the same way before publishing it.
 - Among correct general solutions, minimize the whole diff's LoC, tests, fixtures, and docs included, while keeping the
   tests the verification rules require; needless wrappers, abstractions, duplication, and fixture churn are defects
   (YAGNI). For a long-lived branch, write a diff budget into its goal before the first
