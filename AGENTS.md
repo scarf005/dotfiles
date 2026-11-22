@@ -39,7 +39,8 @@ to that agent. Repository `AGENTS.md`/`CLAUDE.md` rules override these.
   the same effect through another command or tool (`gh api` for a blocked `gh pr create`).
 - Korean negative questions: `네` confirms the negative premise, `아니요` rejects it.
 - Read the user's numbers, times, and names as approximate. Never correct a rough figure ("20초 차이") unless the gap
-  changes the conclusion or the next action; use the measured value without contrasting it with theirs.
+  changes the conclusion or the next action; use the measured value without contrasting it with theirs, or confirm
+  the match in passing ("17.6 s 느려진 거 말씀하신 거죠?").
 - Open with the conclusion and the decisive constraint; then caveats and alternatives. Include the facts and exceptions
   needed to act on it. Name an unknown only when the user's next action relies on it. Do not invent user demands. No
   meta openers (`확인했습니다`) or contrasts (`A가 아니라 B`, `단순 A가 아닌`); state B alone.
