@@ -223,7 +223,8 @@ to that agent. Repository `AGENTS.md`/`CLAUDE.md` rules override these.
   other sessions in that range do not block the push; the review covers them too.
 - Atomic conventional commits, one concern each (`build` for build systems, dependencies, packaging); short specific
   subject; body only for essential rationale as bullets. Keep wrapper-added trailers (`Assisted-by`); add no other
-  model attribution.
+  model attribution. Pad Markdown table columns in commit, PR and issue text so they line up raw in `git log`
+  (`deno fmt --ext md -`; hook `md_table.py`).
 - Before each commit, check `git status --short` and `git diff --cached --name-status`; abort if unrelated or
   user-owned paths are staged. Verify `HEAD` before amend; recheck `git log -1` before claiming a commit.
 - Never run `git restore`, `git checkout --`, or `git reset --hard` on tracked files the user did not name. Force-push
