@@ -116,8 +116,10 @@ to that agent. Repository `AGENTS.md`/`CLAUDE.md` rules override these.
   code the same way before publishing it.
 - Among correct general solutions, minimize the whole diff's LoC, tests, fixtures, and docs included, while keeping the
   tests the verification rules require; needless wrappers, abstractions, duplication, and fixture churn are defects
-  (YAGNI). For a long-lived branch, write a diff budget into its goal before the first
-  commit, report `git diff --shortstat <base>...` at each milestone, and redesign when over budget. The budget is a
+  (YAGNI). Before every commit, run `git diff --shortstat <base>...` and make one shrink pass over the whole diff
+  (setup an existing helper covers, assertions another test already makes, one-use wrappers, comments restating
+  code), then measure again; a user asking to cut LoC means this pass was skipped. For a long-lived branch, write a
+  diff budget into its goal before the first commit, report `git diff --shortstat <base>...` at each milestone, and redesign when over budget. The budget is a
   number of added lines sized to the measured gain or the defect, tests and tooling included; write it into every
   lane brief and send an over-budget result back instead of accepting it. Do not commit
   generated output. Before repeating a change per screen, module, or type, try one adapter at the shared layer. Keep
