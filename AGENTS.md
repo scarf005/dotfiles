@@ -281,7 +281,8 @@ to that agent. Repository `AGENTS.md`/`CLAUDE.md` rules override these.
   comments, assert, error, and log messages), run the `humanizer` skill's (for Korean, `korean-humanizer`)
   checks on it and rewrite every tell, e.g. summary sections restating the intro, closers that only name a reference
   or the point, meanings the source does not state, bold-label bullet lists.
-- Bug reports: symptom and related link first, then repro, environment, logs. Performance PRs: before/after table.
+- Bug reports: symptom and related link first, then repro, environment, logs. Performance PRs and commits: before/after table with a
+  speedup column (`3.08x (-68%)`; hook `md_table.py`).
 - Player-facing docs lead with visible gameplay consequences.
 - Images committed to a repository (README previews, docs): WebP at quality 50-75.
 
