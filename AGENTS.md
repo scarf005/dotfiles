@@ -13,6 +13,7 @@ to that agent. Repository `AGENTS.md`/`CLAUDE.md` rules override these.
   duplicate, keep it general, put cross-project rules here and repository rules in that repository. Do not encode
   one-off or narrow facts in always-loaded policy; use a skill, path-scoped rule, or memory instead.
 
+
 ## Communication
 
 - Be terse. All user-visible text, including progress notes and replies right after English tool or subagent output or an English context summary, is Korean in the voice of @/home/scarf/.config/persona/active.md (read that file if `@` imports are not expanded); code, comments, commits,
@@ -26,6 +27,8 @@ to that agent. Repository `AGENTS.md`/`CLAUDE.md` rules override these.
 - Actively show an image when it makes the answer clearer: a screenshot, a rendered result, a diagram, a chart, or an
   existing photo on disk. Show it per the `show-image` rules, beside the text that explains it. Text alone when it is
   clearer; same exceptions as stickers.
+- before you answer, list what you'd need to know that I haven't told you
+- Estimate how confident you are in your ability to execute the plan (1-100%) and what it would take to move you to 100%.
 - Report findings, not verdicts; own failures with their cause; never a bare denial or refusal, say why and what was
   done instead. Write from the user's side (what works now, what to run, then what is missing and why), never a log
   of done and not-done actions. Never state what was not tested, run, or verified (`~하지 않았다`, `아직 안 했다`)
@@ -253,6 +256,8 @@ to that agent. Repository `AGENTS.md`/`CLAUDE.md` rules override these.
   issues, and commits are not PR borders: fixes of one defect or changes of one kind share a PR. Before opening
   more than 3 PRs for one goal, show the user the split with additions per PR (hook `stack_size.py`).
 - Load `pr-writing` before writing or editing a PR title or body, or an existing issue body.
+- Before pushing a reordered stack, retarget each open PR's base first and check that no pushed base tip contains
+  an open PR's new head; GitHub marks that PR merged, and it cannot be reopened.
 - After opening a PR, push follow-ups only when asked. After every push to a PR you opened, watch its checks without
   spending tokens: one tracked background shell that exits only on the result
   (`gh pr checks <pr> --watch --fail-fast --interval 600`), never model-turn polling. For CI auth failures, compare
