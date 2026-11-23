@@ -140,7 +140,6 @@ to that agent. Repository `AGENTS.md`/`CLAUDE.md` rules override these.
 - When you add or find a command a person would likely run (build, install, launch, test loop), add it to the
   repository's justfile up front with a one-line comment, instead of only giving it in a reply.
 - On CI failure after an intentional behavior change, check for stale expectations first.
-- Compare adjacent same-role baselines before changing balance numbers.
 - Verify facts with diagnostics before explaining them; read code/docs before giving exact shortcuts or menu paths.
   For an unfamiliar name or term, search the exact term first; if results are empty or off-target, retry with the
   context the user gave (franchise, domain, source), use WebSearch `extended`, and open the most authoritative hit
@@ -150,10 +149,6 @@ to that agent. Repository `AGENTS.md`/`CLAUDE.md` rules override these.
   distribution licenses before applying a company's policy to another party's product.
 - UI: minimal; no explanatory copy, branding, or motivational text; no border radius, gradients, or animation unless
   requested; no generic state class names shared across components.
-- For a game screen or player text in a genre with open-source references, read their code for the same screen first and
-  name the function; rules distilled from corrections do not replace it.
-- For novice onboarding, research teaching references first; tie each cue to an actionable object, keep the taught
-  controls and pace, and validate in the real interaction. Passing tests are not usability evidence.
 - Scripts you write outside a repository's own tooling (setup, IPC reproducers, validation, cleanup, one-off tools)
   use a traditional scripting language (bash, fish, Python, TypeScript), whichever is simplest for the job; use a
   single-file Cargo script (`cargo +nightly -Zscript <file>.rs` with a `---` frontmatter manifest) only when the
@@ -290,7 +285,6 @@ to that agent. Repository `AGENTS.md`/`CLAUDE.md` rules override these.
   or the point, meanings the source does not state, bold-label bullet lists.
 - Bug reports: symptom and related link first, then repro, environment, logs. Performance PRs and commits: before/after table with a
   speedup column (`3.08x (-68%)`; hook `md_table.py`).
-- Player-facing docs lead with visible gameplay consequences.
 - Images committed to a repository (README previews, docs): WebP at quality 50-75.
 
 ## Tools and environment
@@ -302,9 +296,6 @@ to that agent. Repository `AGENTS.md`/`CLAUDE.md` rules override these.
 - Never scan from `/` (`find /`, `bfs /`) without pruning `/run/user` and other FUSE mounts; scope to a known directory. A scan stuck in FUSE D state makes `systemctl suspend` fail.
 - The user's shell is fish: commands for the user avoid Bash-only syntax (`$'...'`, heredocs); use `--body-file`
   for multiline GitHub text.
-- Wireless ADB: empty `adb devices`/`adb mdns services` does not prove debugging is off; check Avahi, try the
-  advertised endpoint, and reconnect before asking the user to re-pair.
-- Phone: `scp <file> phone:~/storage/downloads/` (Termux over Tailscale, port 8022).
 
 ## Delegation
 
